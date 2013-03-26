@@ -1,0 +1,137 @@
+/*
+Design by Christoph Miksche
+Website: http://celzekr.tk
+License: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+
+Dieses Werk bzw. Inhalt steht unter einer Creative Commons Namensnennung-Nicht-kommerziell-
+Weitergabe unter gleichen Bedingungen 3.0 Unported Lizenz.
+
+Sie duerfen den/die Link/s zu Celzekr.tk nicht entfernen!
+
+(http://creativecommons.org/licenses/by-nc-sa/3.0/)
+*/
+html { background-image : url(../images/h.png); background-repeat : repeat; background-position : center top; font-family : Arial, Verdana, Helvetica, sans-serif; text-align : center; background-color : #cccccc; margin : 0 auto; }
+body { text-align : left; background-color : #ffffff; min-width:800px; max-width:90%; color:#000000; margin : 0 auto; padding : 10px 10px 10px 10px; -moz-box-shadow: 0px 0px 15px #000000; -webkit-box-shadow: 0px 0px 15px #000000; box-shadow: 0px 0px 15px #000000; border-bottom-right-radius: 5px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-top-left-radius: 5px; border:1px solid #000000; }
+#head { background-color : #414141; color:#ffffff; margin : 0 auto; padding : 5px 5px 5px 5px; font-size : 40px; text-shadow: 2px 2px 3px #000000; border-radius: 10px; border:1px solid #000000; }
+.untertitel { font-size : 20px; color:#cccccc; background-color : #656565; border-radius: 5px; padding : 5px 5px 5px 5px; margin : 5px 5px 5px 5px; border:1px solid #cccccc; text-shadow: 0 0 0.8em #000000, 0 0 0.5em #000000, 0 0 0.2em #000000; }
+#inhalt {float:left; background-color : #cbcbcb; color:#000000; margin : 15px 0px 15px 0px; padding : 5px 5px 5px 5px; font-size : 14px; border-radius: 10px; border:1px solid #000000; }
+#foot {clear:both; margin : 0 auto; padding : 5px 5px 5px 5px; font-size : 11px; text-align : center;}
+.news {background-color : #ffffff; padding : 5px 5px 5px 5px; margin : 5px 5px 15px 5px; border-radius: 10px;}
+.title {padding : 5px 5px 5px 5px; margin : 5px 5px 5px 5px; border-bottom:1px solid #cccccc; font-size : 18px;}
+.text {padding : 5px 5px 5px 5px; margin : 5px 5px 5px 5px; border-bottom:1px solid #cccccc; font-size : 14px;}
+.infos {padding : 5px 5px 5px 5px; margin : 5px 5px 5px 5px; border-bottom:1px solid #cccccc; font-size : 14px;}
+.comments {padding : 5px 5px 5px 5px; margin : 5px 5px 5px 5px; border-bottom:1px solid #cccccc; font-size : 14px;}
+ .fehler { text-align: left; border-left:5px solid #ff0000; background-color: #ffafaf; padding: 5px 5px 5px 5px; margin: 5px 5px 5px 5px;}
+.erfolg { text-align: left; border-left:5px solid #36a736; background-color: #a6ffa6; padding: 5px 5px 5px 5px; margin: 5px 5px 5px 5px;}
+.comment {text-align: left; border-left:2px solid #cccccc; border-bottom:2px solid #cccccc; background-color: #ffffff; padding: 5px 5px 5px 5px; margin: 5px 5px 5px 5px;}
+#foot a:link    {color: #414141;  text-decoration:none; border-bottom:1px solid #656565;}
+#foot a:visited {color: #414141;  text-decoration:none; border-bottom:1px solid #656565;}
+#foot a:focus   {color: #414141;  text-decoration:none; border-bottom:1px solid #656565;}
+#foot a:hover   {color: #000000;  text-decoration:none; border-bottom:1px solid #000000;}
+#foot a:active  {color: #414141;  text-decoration:none; border-bottom:1px solid #656565;}
+.news a:link    {color: #414141;  text-decoration:none;}
+.news a:visited {color: #414141;  text-decoration:none;}
+.news a:focus   {color: #414141;  text-decoration:none;}
+.news a:hover   {color: #000000;  text-decoration:none;}
+.news a:active  {color: #414141;  text-decoration:none;}
+img {border:0px;}
+#navi img {opacity: 0.7; border:1px solid #000000; margin : 0 auto; text-align : center; -moz-box-shadow: 0px 0px 5px #000000; -webkit-box-shadow: 0px 0px 5px #000000; box-shadow: 0px 0px 5px #000000;}
+#navi img:hover {opacity: 1.0; border:1px solid #000000; margin : 0 auto; text-align : center; -moz-box-shadow: 0px 0px 5px #000000; -webkit-box-shadow: 0px 0px 5px #000000; box-shadow: 0px 0px 5px #000000;}
+.lb, button {
+ cursor: pointer;
+ color:#ffffff;
+ background-color: #000000;
+   padding: 2px 2px 2px 2px;
+   font-size: 12px;
+   border:1px solid #ffffff;
+   margin-top:5px;
+   -moz-box-shadow: 0px 0px 5px #000000;
+-webkit-box-shadow: 0px 0px 5px #000000;
+box-shadow: 0px 0px 5px #000000;
+ }
+
+.lb:hover, button:hover {
+ cursor: pointer;
+ color:#ffffff;
+ background-color: #000000;
+   padding: 2px 2px 2px 2px;
+   font-size: 12px;
+   border:1px solid #ffffff;
+   margin-top:5px;
+   -moz-box-shadow: 0px 0px 5px #000000;
+-webkit-box-shadow: 0px 0px 5px #000000;
+box-shadow: 0px 0px 5px #000000;
+opacity: 0.5;
+}
+
+.li {
+border:1px solid #000000;
+color:#000000;
+background-color : #ffffff;
+  padding: 2px 2px 2px 2px;
+   font-size: 12px;
+   margin-bottom:5px;
+ }
+.lio {
+color:#000000;
+background-color: #ffffff;
+   font-size: 12px;
+ }
+.lio:hover {
+color:#ffffff;
+background-color: #000000;
+   font-size: 12px;
+ }
+ .li1 {
+border:1px solid #000000;
+color:#000000;
+background-color : #ffffff;
+  padding: 2px 2px 2px 2px;
+   font-size: 12px;
+   margin-bottom:5px;
+   margin-right:5px;
+ }
+ .fehler {
+ text-align: left;
+border-left:5px solid #ff0000;
+background-color: #ffafaf;
+padding: 5px 5px 5px 5px;
+margin: 5px 5px 5px 5px;
+ }
+.erfolg {
+ text-align: left;
+border-left:5px solid #36a736;
+background-color: #a6ffa6;
+padding: 5px 5px 5px 5px;
+margin: 5px 5px 5px 5px;
+ }
+.comment {
+ text-align: left;
+border-left:2px solid #cccccc;
+border-bottom:2px solid #cccccc;
+background-color: #ffffff;
+padding: 5px 5px 5px 5px;
+margin: 5px 5px 5px 5px;
+}
+.hallo {display:none;}
+  #cpcontainer {height:60px; padding:5px; margin:5px;}
+
+  #colorpicker       { border:1px ridge #dddddd; }
+  #colorpicker td  { width:10px; height:10px; cursor:pointer; border:0px solid #cccccc; }
+  #colorpicker td:hover  {opacity: 0.5; width:10px; height:10px; cursor:pointer; border:0px solid white; box-shadow: 0px 0px 2px #000000, 0px 0px 5px #cccccc, 0px 0px 15px #000000;}
+  
+  #beitrag
+  { width:600px;
+    overflow:visible;
+    padding:5px;
+    position:relative;
+  }
+  #beitrag button
+  { 
+  }
+  #beitrag select        { margin:0px 3px; }
+  #beitrag textarea      { display:block; margin:5px auto; width:100%; }
+  #beitrag div.center    { text-align:center; }
+  #beitrag img           { border:none; cursor:pointer;}
+  #beitrag #buttonleiste { white-space:nowrap; }
+  #beitrag #smilies      {float:right; width:250px; position:relative; right:5px; }
