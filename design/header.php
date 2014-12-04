@@ -11,7 +11,7 @@ Sie duerfen die Links zu celzekr.webpage4.me und Scripts.Wronnay.net nicht entfe
 
 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 -->
-<html><head><title><?php echo $titel; ?></title><meta name="description" content="<?php echo $beschreibung; ?>"><meta name="keywords" content="<?php echo $schlagwoerter; ?>"><meta charset="ISO-8859-1"><link rel="shortcut icon" href="images/fav.ico"><link rel="stylesheet" type="text/css" href="design/grau.css">
+<html><head><title><?php echo nocss($titel); ?></title><meta name="description" content="<?php echo nocss($beschreibung); ?>"><meta name="keywords" content="<?php echo nocss($schlagwoerter); ?>"><meta charset="UTF-8"><link rel="shortcut icon" href="images/fav.ico"><link rel="stylesheet" type="text/css" href="design/grau.css">
 </head><body>
-<div id="head"><?php echo $titel; ?><div class="untertitel"><?php echo $untertitel; ?></div></div>
+<div id="head"><?php echo nocss($titel); ?><div class="untertitel"><?php echo nocss($untertitel); ?></div></div>
 <div id="inhalt">

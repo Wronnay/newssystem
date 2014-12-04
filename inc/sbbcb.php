@@ -3,8 +3,9 @@
 <?php
 if ($admin == "1") {$adminloc = "../";} else {$adminloc = "";}
 $smiliesql = "SELECT id, title, url, color FROM wronnay_forum_smilies WHERE color='green'";
-$smilies_result = mysql_query($smiliesql) OR die("<pre>\n".$smiliesql."</pre>\n".mysql_error());
-    while ($smilieu = mysql_fetch_assoc($smilies_result)) {
+$dbpre = $dbc->prepare($smiliesql);
+$dbpre->execute();
+    while ($smilieu = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 echo "<img src=\"".$adminloc."images/system/smilies/".$smilieu['color']."/".$smilieu['url']."\" onclick=\"insertText(' ".$smilieu['title']." ','')\" alt=\"".$smilieu['title']."\" title=\"".$smilieu['title']."\" /> ";
 	}
 ?>
@@ -24,7 +25,7 @@ echo "<img src=\"".$adminloc."images/system/smilies/".$smilieu['color']."/".$smi
     <!-- <select size="1" onchange="insertProperty('color',this.value); this.selectedIndex=0;">
       <option value="rgb(0,0,0)">schwarz&nbsp;&nbsp;</option>
       <option value="rgb(255,0,0)">rot</option>
-      <option value="rgb(0,255,0)">grün</option>
+      <option value="rgb(0,255,0)">grÃ¼n</option>
       <option value="rgb(0,0,255)">blau</option>
     </select> -->
 
@@ -35,7 +36,7 @@ echo "<img src=\"".$adminloc."images/system/smilies/".$smilieu['color']."/".$smi
     </select>
 
     <button type="button" onclick="generateColorTable('cpcontainer')" id="schriftbutton">
-      Farbwähler ein/aus
+      FarbwÃ¤hler ein/aus
     </button>
   </div>  <!-- #buttonleiste -->
 </div>

@@ -1,8 +1,9 @@
-<div class="title">Kommentare löschen</div>
+<div class="title">Kommentare lÃ¶schen</div>
 <?php
 if(isset($_GET['id'])){
-      mysql_query("DELETE FROM wronnay_news_comments WHERE id='".mysql_real_escape_string($_GET['id'])."'");
-	  echo "<div class=\"erfolg\">Der Kommentar wurde gelöscht!</div>";
+      $dbpre = $dbc->prepare("DELETE FROM wronnay_news_comments WHERE id='".$_GET['id']."'");
+      $dbpre->execute();
+	  echo "<div class=\"erfolg\">Der Kommentar wurde gelÃ¶scht!</div>";
 }
     $sql = "SELECT
 	                id,
@@ -15,11 +16,12 @@ if(isset($_GET['id'])){
             ORDER BY
                     date DESC
            ";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-		if (mysql_num_rows($result) == 0) {
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+		if ($dbpre->rowCount() < 1) {
 	    echo "Es gibt noch keine Kommentare!";
 	}
-    while ($row = mysql_fetch_assoc($result)) {
-        echo "<div class=\"comment\"><b>Geschrieben von: ".$row['autor']." am: ".$row['date']."</b> <a href=\"index.php?admin=deletecomments&id=".$row['id']."\">Löschen</a><br>".$row['comment']."</div>\n";
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+        echo "<div class=\"comment\"><b>Geschrieben von: ".nocss($row['autor'])." am: ".nocss($row['date'])."</b> <a href=\"index.php?admin=deletecomments&id=".nocss($row['id'])."\">LÃ¶schen</a><br>".nocss($row['comment'])."</div>\n";
     }
 ?>

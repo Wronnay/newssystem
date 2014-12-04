@@ -3,17 +3,18 @@ error_reporting(0);
 include 'data.php';
 include 'config.php';
 function nocss($nocss) {
-  $nocss = mysql_real_escape_string($nocss);
   $nocss = strip_tags($nocss);
   $nocss = htmlspecialchars($nocss);
   return $nocss;
 }
-mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-mysql_select_db($DB)or die(mysql_error());
-$sql = "SELECT id, autor, title, news, date, description, keywords FROM wronnay_news WHERE id  = '".mysql_real_escape_string($_GET['id'])."' ORDER BY date DESC";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-    while ($row = mysql_fetch_assoc($result)) {
-	$comments = mysql_num_rows(mysql_query("SELECT id FROM wronnay_news_comments WHERE news_id = '".$row['id']."'"));
+$dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.'');
+$dbc->query("SET CHARACTER SET utf8");
+$sql = "SELECT id, autor, title, news, date, description, keywords FROM wronnay_news WHERE id  = '".$_GET['id']."' ORDER BY date DESC";
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+	$dbpre1 = $dbc->prepare("SELECT id FROM wronnay_news_comments WHERE news_id = '".$row['id']."'");	
+	$comments = $dbpre1->rowCount();
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -28,13 +29,13 @@ Sie duerfen die Links zu celzekr.webpage4.me und Scripts.Wronnay.net nicht entfe
 
 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 -->
-<html><head><title><?php echo "".nocss($row['title'])."" ?> | <?php echo $titel; ?></title><meta name="description" content="<?php echo "".nocss($row['description'])."" ?>"><meta name="keywords" content="<?php echo "".nocss($row['keywords'])."" ?>"><meta charset="ISO-8859-1"><link rel="shortcut icon" href="images/fav.ico"><link rel="stylesheet" type="text/css" href="design/grau.css">
+<html><head><title><?php echo "".nocss($row['title'])."" ?> | <?php echo nocss($titel); ?></title><meta name="description" content="<?php echo "".nocss($row['description'])."" ?>"><meta name="keywords" content="<?php echo "".nocss($row['keywords'])."" ?>"><meta charset="UTF-8"><link rel="shortcut icon" href="images/fav.ico"><link rel="stylesheet" type="text/css" href="design/grau.css">
 <?php 
 include 'inc/showbbc.php'; 
 include 'inc/bbc.php'; 
 ?>
 </head><body>
-<div id="head"><?php echo $titel; ?><div class="untertitel"><?php echo $untertitel; ?></div></div>
+<div id="head"><?php echo nocss($titel); ?><div class="untertitel"><?php echo nocss($untertitel); ?></div></div>
 <div id="inhalt">
 <div class="news">
 <div class="title">
@@ -62,9 +63,9 @@ Autor: <?php echo "".nocss($row['autor'])."" ?> | Vom: <?php echo "".nocss($row[
             ORDER BY
                     date DESC
            ";
-    $result555 = mysql_query($sql555) OR die("<pre>\n".$sql555."</pre>\n".mysql_error());
-
-    while ($row555 = mysql_fetch_assoc($result555)) {
+    $dbpre2 = $dbc->prepare($sql555);
+	$dbpre2->execute();
+    while ($row555 = $dbpre2->fetch(PDO::FETCH_ASSOC)) {
         echo "<div class=\"comment\"><b>Geschrieben von: ".nocss($row555['autor'])." am: ".nocss($row555['date'])."</b><br>".nocss($row555['comment'])."</div>\n";
     }
 ?>
@@ -78,20 +79,18 @@ Autor: <?php echo "".nocss($row['autor'])."" ?> | Vom: <?php echo "".nocss($row[
 	  echo"<div class=\"fehler\">You are an SPAM-Bot!</div>";
 	  }
 	  else {
-	  $bodynachricht = parse_bbcode(mysql_real_escape_string($_REQUEST['comment']));
-	  mysql_query("INSERT INTO wronnay_news_comments (autor, news_id, comment, date) VALUES ('".mysql_real_escape_string($_REQUEST['name'])."','".$row['id']."','".$bodynachricht."',now())");
+	  $bodynachricht = $_REQUEST['comment'];
+	  $dbpre3 = $dbc->prepare("INSERT INTO wronnay_news_comments (autor, news_id, comment, date) VALUES ('".$_REQUEST['name']."','".$row['id']."','".$bodynachricht."',now())");
+	  $dbpre3->execute();
 	  echo "<div class=\"erfolg\">Sie haben den Kommentar eingetragen.</div>";
 	  }
   }
 ?>
-<br><form action="" method="post">
+<br><form action="news.php?id=<?php echo nocss($_GET['id']); ?>" method="post">
 <p class="hallo">
   <input id="email" name="email" size="60" value="" />
 </p>
           Kommentar schreiben: <br>
-<?php
-include 'inc/sbbcb.php';
-?>
           <textarea id="nachricht" class="li" name="comment" cols="40" rows="5"></textarea>
           <br>
 		  Ihr Name: <input class="li" type="text" name="name"><br>

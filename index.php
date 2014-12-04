@@ -4,14 +4,13 @@ include 'config.php';
 if (!isset ($DB)) { header("Location: install/index.php"); }
 include 'data.php';
 function nocss($nocss) {
-  $nocss = mysql_real_escape_string($nocss);
   $nocss = strip_tags($nocss);
   $nocss = htmlspecialchars($nocss);
   return $nocss;
 }
 include 'design/header.php';
-mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-mysql_select_db($DB)or die(mysql_error());
+$dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.'');
+$dbc->query("SET CHARACTER SET utf8");
     $sql = "SELECT
             id,
             autor,
@@ -27,12 +26,15 @@ mysql_select_db($DB)or die(mysql_error());
 		LIMIT 
 		    15
 		";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-			if (mysql_num_rows($result) == 0) {
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+			if ($dbpre->rowCount() < 1) {
 	    echo "Es gibt noch keine News!";
 	}
-    while ($row = mysql_fetch_assoc($result)) {
-	$comments = mysql_num_rows(mysql_query("SELECT id FROM wronnay_news_comments WHERE news_id = '".$row['id']."'"));
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+	$dbpre1 = $dbc->prepare("SELECT id FROM wronnay_news_comments WHERE news_id = '".$row['id']."'");
+	$dbpre1->execute();
+	$comments = $dbpre1->rowCount();
 include 'design/news.php';
     }
 include 'design/footer.php';
